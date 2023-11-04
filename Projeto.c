@@ -2,13 +2,11 @@
 #include <stdio.h>
 
 //Vinícius de Castro Duarte - 24.123.073-9
-//Renan Ivaskevicius Vieira - 24.123.069-7
 
 void limpa() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
-// para o bem do decorrer do codigo, criamos essa funcao para apagar o conteudo da variavel de contagem
 
 void ler(struct Tarefa *armazena) {
     printf("Prioridade: ");
@@ -20,8 +18,27 @@ void ler(struct Tarefa *armazena) {
     printf("Categoria: ");
     scanf("%99[^\n]", armazena->categoria);
     limpa();
+    printf("Estado:\n");
+    printf("[1] Completo\n[2] Em andamento\n[3] Nao iniciado\n");
+    int opcao_estado;
+    scanf("%d", &opcao_estado);
+    limpa();
+
+    switch (opcao_estado) {
+        case 1:
+            strcpy(armazena->estado, "Completo");
+            break;
+        case 2:
+            strcpy(armazena->estado, "Em andamento");
+            break;
+        case 3:
+            strcpy(armazena->estado, "Nao iniciado");
+            break;
+        default:
+            strcpy(armazena->estado, "Estado indefinido");
+            break;
+    }
 }
-// essa funcao le o que foi digitado pelo usuario e escreve no arquivo binario
 
 void excluir_tarefa(struct Tarefa *tarefas, int *cont, int posicao) {
     if (posicao >= 1 && posicao <= *cont) {
@@ -32,4 +49,70 @@ void excluir_tarefa(struct Tarefa *tarefas, int *cont, int posicao) {
         printf("Tarefa deletada\n\n");
     }
 }
-// essa funcao exclui uma tarefa desejada do arquivo binario
+
+void alterarTarefa(struct Tarefa *tarefas, int cont) {
+    int numero_tarefa, opcao;
+    printf("Escolha o número da tarefa que deseja alterar: ");
+    scanf("%d", &numero_tarefa);
+    limpa();
+
+    if (numero_tarefa < 1 || numero_tarefa > cont) {
+        printf("Numero de tarefa invalido.\n");
+        return;
+    }
+
+    printf("Escolha o campo que deseja alterar:\n");
+    printf("[1] Prioridade\n[2] Descrição\n[3] Categoria\n[4] Estado\n");
+    printf("Digite o número correspondente ao campo: ");
+    scanf("%d", &opcao);
+    limpa();
+
+    switch (opcao) {
+        case 1:
+            printf("Nova prioridade: ");
+            scanf("%d", &tarefas[numero_tarefa - 1].prioridade);
+            limpa();
+            break;
+        case 2:
+            printf("Nova descrição: ");
+            scanf("%299[^\n]", tarefas[numero_tarefa - 1].descricao);
+            limpa();
+            break;
+        case 3:
+            printf("Nova categoria: ");
+            scanf("%99[^\n]", tarefas[numero_tarefa - 1].categoria);
+            limpa();
+            break;
+        case 4:
+            printf("Novo estado:\n");
+            printf("[1] Completo\n[2] Em andamento\n[3] Nao iniciado\n");
+            int opcao_estado;
+            scanf("%d", &opcao_estado);
+            limpa();
+
+            switch (opcao_estado) {
+                case 1:
+                    strcpy(tarefas[numero_tarefa - 1].estado, "Completo");
+                    break;
+                case 2:
+                    strcpy(tarefas[numero_tarefa - 1].estado, "Em andamento");
+                    break;
+                case 3:
+                    strcpy(tarefas[numero_tarefa - 1].estado, "Nao iniciado");
+                    break;
+                default:
+                    printf("Opção de estado inválida.\n");
+                    break;
+            }
+            break;
+        default:
+            printf("Opção inválida.\n");
+            break;
+    }
+    FILE *arquivo_binario = fopen("tarefas.txt", "wb");
+    if (arquivo_binario) {
+        fwrite(tarefas, sizeof(struct Tarefa), cont, arquivo_binario);
+        fclose(arquivo_binario);
+    }
+  return;
+}
