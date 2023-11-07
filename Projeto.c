@@ -116,3 +116,28 @@ void alterarTarefa(struct Tarefa *tarefas, int cont) {
     }
   return;
 }
+
+
+void filtrarTarefaPrioridade(struct Tarefa *tarefas, int cont){
+  int prioridade;
+  int c = 0;
+  printf("Digite a prioridade desejada: ");
+  scanf("%d", &prioridade);
+  printf("\n");
+  limpa();
+
+  printf("Tarefas encontradas:\n\n");
+  for (int i = 0; i < cont; i++) {
+      if (tarefas[i].prioridade == prioridade) {
+          printf("Nome da tarefa: %d\n", i + 1);
+          printf("Prioridade: %d\n", tarefas[i].prioridade);
+          printf("Categoria: %s\n", tarefas[i].categoria);
+          printf("Descricao: %s\n", tarefas[i].descricao);
+          printf("Estado: %s\n\n", tarefas[i].estado);
+          c++;
+      }
+  }
+  if(c == 0){
+    printf("Nenhuma tarefa encontrada para a prioridade escolhida!\n\n");
+  }
+}
