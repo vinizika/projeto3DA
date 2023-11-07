@@ -1,5 +1,6 @@
 #include "Projeto.h"
 #include <stdio.h>
+#include <string.h>
 
 //Vinícius de Castro Duarte - 24.123.073-9
 
@@ -125,11 +126,10 @@ void filtrarTarefaPrioridade(struct Tarefa *tarefas, int cont){
   scanf("%d", &prioridade);
   printf("\n");
   limpa();
-
   printf("Tarefas encontradas:\n\n");
   for (int i = 0; i < cont; i++) {
       if (tarefas[i].prioridade == prioridade) {
-          printf("Nome da tarefa: %d\n", i + 1);
+          printf("Posicao da tarefa: %d\n", i + 1);
           printf("Prioridade: %d\n", tarefas[i].prioridade);
           printf("Categoria: %s\n", tarefas[i].categoria);
           printf("Descricao: %s\n", tarefas[i].descricao);
@@ -140,4 +140,39 @@ void filtrarTarefaPrioridade(struct Tarefa *tarefas, int cont){
   if(c == 0){
     printf("Nenhuma tarefa encontrada para a prioridade escolhida!\n\n");
   }
+}
+
+void filtrarTarefaEstado(struct Tarefa *tarefas, int cont){
+  int estado;
+  char estadoEscrito[30];
+  printf("Digite o numero correspondente ao estado da tarefa\n");
+  printf("[1] Completo\n[2] Em andamento\n[3] Nao iniciado\n");
+  scanf("%d", &estado);
+    if (estado < 1 || estado > 3) {
+        printf("Opcao invalida!\n");
+        return;
+    } else if (estado == 1) {
+        strcpy(estadoEscrito, "Completo");
+    } else if (estado == 2) {
+        strcpy(estadoEscrito, "Em andamento");
+    } else if (estado == 3) {
+        strcpy(estadoEscrito, "Nao iniciado");
+    }
+    printf("\n");
+  limpa();
+    int c = 0;
+    printf("Tarefas encontradas:\n\n");
+    for (int i = 0; i < cont; i++) {
+      if (strcmp(tarefas[i].estado, estadoEscrito) == 0) {
+        printf("Posicao da tarefa: %d\n", i + 1);
+        printf("Prioridade: %d\n", tarefas[i].prioridade);
+        printf("Categoria: %s\n", tarefas[i].categoria);
+        printf("Descricao: %s\n", tarefas[i].descricao);
+        printf("Estado: %s\n\n", tarefas[i].estado);
+        c++;
+        }
+    }
+    if(c == 0){
+      printf("Nenhuma tarefa encontrada para a prioridade escolhida!\n\n");
+  } 
 }
