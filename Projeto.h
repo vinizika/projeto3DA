@@ -15,5 +15,6 @@ void ler(struct Tarefa *armazena);
 void excluir_tarefa(struct Tarefa *tarefas, int *cont, int posicao);
 void alterarTarefa(struct Tarefa *tarefas, int cont);
 void filtrarTarefaPrioridade(struct Tarefa *tarefas, int cont);
+void filtrarTarefaEstado(struct Tarefa *tarefas, int cont);
 
 #endif//PROJETO_H
