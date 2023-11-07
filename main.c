@@ -48,7 +48,7 @@ int main() {
     } else if (opcao == 3) {
       printf("Lista:\n\n");
       for (int x = 0; x < cont; x++) {
-        printf("Nome da tarefa: %d\n", x + 1);
+        printf("Posicao da tarefa: %d\n", x + 1);
         printf("Prioridade: %d\n", t[x].prioridade);
         printf("Categoria: %s\n", t[x].categoria);
         printf("Descricao: %s\n", t[x].descricao);
@@ -66,6 +66,8 @@ int main() {
         
       } else if(opcaoFiltro == 2){
         filtrarTarefaPrioridade(t, cont);
+      } else if(opcaoFiltro == 3){
+        filtrarTarefaEstado(t, cont);
       }
     } else if (opcao == 6) {
       arquivo_binario = fopen("tarefas.txt", "wb");
