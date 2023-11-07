@@ -23,7 +23,8 @@ int main() {
     printf(" 2 - Excluir\n");
     printf(" 3 - Listar\n");
     printf(" 4 - Editar\n");
-    printf(" 5 - Sair\n");
+    printf(" 5 - Filtros\n");
+    printf(" 6 - Sair\n");
     printf("Escreva apenas o numero da opcao que deseja: ");
     char *p, s_opcao[100];
     char *p_posicao, s_posicao[100];
@@ -56,7 +57,17 @@ int main() {
 
     }else if(opcao == 4){
       alterarTarefa(t, cont);
-    } else if (opcao == 5) {
+    } else if(opcao == 5){
+      printf("Escolha dentre os filtros abaixo o desejado:\n\n");
+      printf("1 - Categoria\n2 - Prioridade\n3 - Estado\n4 - Prioridade e Categoria\n");
+      int opcaoFiltro;
+      scanf("%d", &opcaoFiltro);
+      if(opcaoFiltro == 1){
+        
+      } else if(opcaoFiltro == 2){
+        filtrarTarefaPrioridade(t, cont);
+      }
+    } else if (opcao == 6) {
       arquivo_binario = fopen("tarefas.txt", "wb");
       if (arquivo_binario) {
         fwrite(t, sizeof(struct Tarefa), cont, arquivo_binario);
