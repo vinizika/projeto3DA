@@ -264,5 +264,25 @@ void exportarTarefasPorPrioridade(struct Tarefa *tarefas, int cont) {
     }
 
     fclose(arquivo_export);
-    printf("Tarefas da prioridade %d exportadas para o arquivo 'tarefas_prioridade.txt'.\n", prioridade_escolhida);
+    printf("Tarefas da prioridade [%d] exportadas para o arquivo 'tarefas_prioridade.txt'.\n", prioridade_escolhida);
 }
+
+void exportarTarefasPorCategoria(struct Tarefa *tarefas, int cont) {
+    char categoria_escolhida[100];
+
+    printf("Digite a categoria para exportar as tarefas: ");
+    scanf("%s", categoria_escolhida);
+    limpa();
+
+    FILE *arquivo_export = fopen("tarefas_categoria.txt", "w");
+
+    for (int i = 0; i < cont; i++) {
+        if (strcmp(tarefas[i].categoria, categoria_escolhida) == 0) {
+            fprintf(arquivo_export, "Prioridade: %d\nCategoria: %s\nEstado: %s\nDescricao: %s\n\n", tarefas[i].prioridade, tarefas[i].categoria, tarefas[i].estado, tarefas[i].descricao);
+        }
+    }
+
+    fclose(arquivo_export);
+    printf("Tarefas da categoria [%s] exportadas para o arquivo 'tarefas_categoria.txt'.\n", categoria_escolhida);
+}
+
