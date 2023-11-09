@@ -73,7 +73,19 @@ int main() {
         filtrarPorPrioridadeECategoria(t, cont);
       }
     } else if(opcao == 6){
-      exportarTarefasPorPrioridade(t, cont);
+      printf("Escolha dentre os meios de exportação:\n\n");
+      printf("1 - Prioridade\n2 - Categoria\n3 - Prioridade e Categoria\n");
+      int opcaoExportar;
+      scanf("%d", &opcaoExportar);
+      if(opcaoExportar == 1){
+        exportarTarefasPorPrioridade(t, cont);
+      } else if(opcaoExportar == 2){
+        exportarTarefasPorCategoria(t, cont);
+      } else if(opcaoExportar == 3){
+        
+      }else{
+        printf("Digite uma opcao entre 1 e 3!\n\n");
+      }
     } else if (opcao == 7) {
       arquivo_binario = fopen("tarefas.txt", "wb");
       if (arquivo_binario) {
