@@ -21,5 +21,6 @@ void filtrarTarefaEstado(struct Tarefa *tarefas, int cont);
 void filtrarPorPrioridadeECategoria(struct Tarefa *tarefas, int cont);
 void exportarTarefasPorPrioridade(struct Tarefa *tarefas, int cont);
 void exportarTarefasPorCategoria(struct Tarefa *tarefas, int cont);
+void exportarTarefasPorCategoriaPrioridade(struct Tarefa *tarefas, int cont);
 
 #endif // PROJETO_H
