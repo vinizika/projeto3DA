@@ -12,7 +12,6 @@ struct Tarefa {
 };
 
 void limpa();
-void limpaChar(char *buffer);
 void ler(struct Tarefa *armazena);
 void excluir_tarefa(struct Tarefa *tarefas, int *cont, int posicao);
 void alterarTarefa(struct Tarefa *tarefas, int cont);
