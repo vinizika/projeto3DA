@@ -68,6 +68,8 @@ int main() {
         filtrarTarefaPrioridade(t, cont);
       } else if(opcaoFiltro == 3){
         filtrarTarefaEstado(t, cont);
+      } else if(opcaoFiltro == 4){
+        filtrarPorPrioridadeECategoria(t, cont);
       }
     } else if (opcao == 6) {
       arquivo_binario = fopen("tarefas.txt", "wb");
