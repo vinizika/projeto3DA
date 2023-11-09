@@ -9,6 +9,7 @@ void limpa() {
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
 
+
 void ler(struct Tarefa *armazena) {
     printf("Prioridade: ");
     scanf("%d", &armazena->prioridade);
@@ -175,4 +176,39 @@ void filtrarTarefaEstado(struct Tarefa *tarefas, int cont){
     if(c == 0){
       printf("Nenhuma tarefa encontrada para a prioridade escolhida!\n\n");
   } 
+}
+
+void filtrarTarefaCategoria(struct Tarefa *tarefas, int cont) {
+    char categoria_desejada[100];
+    printf("Digite a categoria desejada: ");
+    scanf("%99s", categoria_desejada);
+    limpa();
+
+    // Ordena as tarefas por prioridade crescente
+    for (int i = 0; i < cont - 1; i++) {
+        for (int j = 0; j < cont - i - 1; j++) {
+            if (tarefas[j].prioridade > tarefas[j + 1].prioridade) {
+                struct Tarefa temp = tarefas[j];
+                tarefas[j] = tarefas[j + 1];
+                tarefas[j + 1] = temp;
+            }
+        }
+    }
+
+    int c = 0;
+    printf("Tarefas encontradas para a categoria '%s':\n\n", categoria_desejada);
+    for (int i = 0; i < cont; i++) {
+        if (strcmp(tarefas[i].categoria, categoria_desejada) == 0) {
+            printf("Posição da tarefa: %d\n", i + 1);
+            printf("Prioridade: %d\n", tarefas[i].prioridade);
+            printf("Categoria: %s\n", tarefas[i].categoria);
+            printf("Descrição: %s\n", tarefas[i].descricao);
+            printf("Estado: %s\n\n", tarefas[i].estado);
+            c++;
+        }
+    }
+
+    if (c == 0) {
+        printf("Nenhuma tarefa encontrada para a categoria escolhida!\n\n");
+    }
 }
