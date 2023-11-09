@@ -4,12 +4,13 @@
 
 //Vinícius de Castro Duarte - 24.123.073-9
 
+// limpa buffer
 void limpa() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
 
-
+// solicita e le informacoes de uma tarefa
 void ler(struct Tarefa *armazena) {
     printf("Prioridade: ");
     scanf("%d", &armazena->prioridade);
@@ -40,8 +41,10 @@ void ler(struct Tarefa *armazena) {
             strcpy(armazena->estado, "Estado indefinido");
             break;
     }
+    // switch para selecionar estado
 }
 
+// exclui tarefa
 void excluir_tarefa(struct Tarefa *tarefas, int *cont, int posicao) {
     if (posicao >= 1 && posicao <= *cont) {
         for (int i = posicao - 1; i < *cont - 1; i++) {
@@ -52,6 +55,7 @@ void excluir_tarefa(struct Tarefa *tarefas, int *cont, int posicao) {
     }
 }
 
+// edita tarefa
 void alterarTarefa(struct Tarefa *tarefas, int cont) {
     int numero_tarefa, opcao;
     printf("Escolha o número da tarefa que deseja alterar: ");
@@ -119,7 +123,7 @@ void alterarTarefa(struct Tarefa *tarefas, int cont) {
   return;
 }
 
-
+// filtra em base da prioridade
 void filtrarTarefaPrioridade(struct Tarefa *tarefas, int cont){
   int prioridade;
   int c = 0;
@@ -143,6 +147,7 @@ void filtrarTarefaPrioridade(struct Tarefa *tarefas, int cont){
   }
 }
 
+// filtra em base do estado
 void filtrarTarefaEstado(struct Tarefa *tarefas, int cont){
   int estado;
   char estadoEscrito[30];
@@ -178,6 +183,7 @@ void filtrarTarefaEstado(struct Tarefa *tarefas, int cont){
   } 
 }
 
+// filtra em base da categoria
 void filtrarTarefaCategoria(struct Tarefa *tarefas, int cont) {
     char categoria_desejada[100];
     printf("Digite a categoria desejada: ");
@@ -213,6 +219,7 @@ void filtrarTarefaCategoria(struct Tarefa *tarefas, int cont) {
     }
 }
 
+// filtra em base da prioridade e categoria
 void filtrarPorPrioridadeECategoria(struct Tarefa *tarefas, int cont) {
     int prioridade;
     char categoria_desejada[100];
@@ -244,6 +251,7 @@ void filtrarPorPrioridadeECategoria(struct Tarefa *tarefas, int cont) {
     }
 }
 
+// exporta para um arquivo txt em base da prioridade
 void exportarTarefasPorPrioridade(struct Tarefa *tarefas, int cont) {
     int prioridade_escolhida;
 
@@ -263,6 +271,7 @@ void exportarTarefasPorPrioridade(struct Tarefa *tarefas, int cont) {
     printf("Tarefas da prioridade [%d] exportadas para o arquivo 'tarefas_prioridade.txt'.\n", prioridade_escolhida);
 }
 
+// exporta para um arquivo txt em base da categoria
 void exportarTarefasPorCategoria(struct Tarefa *tarefas, int cont) {
     char categoria_escolhida[100];
 
@@ -293,6 +302,7 @@ void exportarTarefasPorCategoria(struct Tarefa *tarefas, int cont) {
     printf("Tarefas da categoria [%s] exportadas para o arquivo 'tarefas_categoria.txt' em ordem de prioridade.\n", categoria_escolhida);
 }
 
+// exporta para um arquivo txt em base da prioridade e da categoria
 void exportarTarefasPorCategoriaPrioridade(struct Tarefa *tarefas, int cont) {
     char categoria_escolhida[100];
     int prioridade_desejada;
