@@ -63,7 +63,7 @@ int main() {
       int opcaoFiltro;
       scanf("%d", &opcaoFiltro);
       if(opcaoFiltro == 1){
-        
+        filtrarTarefaCategoria(t, cont);
       } else if(opcaoFiltro == 2){
         filtrarTarefaPrioridade(t, cont);
       } else if(opcaoFiltro == 3){
