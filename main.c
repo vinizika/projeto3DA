@@ -24,7 +24,8 @@ int main() {
     printf(" 3 - Listar\n");
     printf(" 4 - Editar\n");
     printf(" 5 - Filtros\n");
-    printf(" 6 - Sair\n");
+    printf(" 6 - Exportar\n");
+    printf(" 7 - Encerrar\n");
     printf("Escreva apenas o numero da opcao que deseja: ");
     char *p, s_opcao[100];
     char *p_posicao, s_posicao[100];
@@ -71,7 +72,9 @@ int main() {
       } else if(opcaoFiltro == 4){
         filtrarPorPrioridadeECategoria(t, cont);
       }
-    } else if (opcao == 6) {
+    } else if(opcao == 6){
+      exportarTarefasPorPrioridade(t, cont);
+    } else if (opcao == 7) {
       arquivo_binario = fopen("tarefas.txt", "wb");
       if (arquivo_binario) {
         fwrite(t, sizeof(struct Tarefa), cont, arquivo_binario);

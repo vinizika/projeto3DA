@@ -243,3 +243,26 @@ void filtrarPorPrioridadeECategoria(struct Tarefa *tarefas, int cont) {
         printf("Nenhuma tarefa encontrada para a prioridade e categoria escolhidas!\n\n");
     }
 }
+
+void exportarTarefasPorPrioridade(struct Tarefa *tarefas, int cont) {
+    int prioridade_escolhida;
+
+    printf("Digite a prioridade para exportar as tarefas: ");
+    scanf("%d", &prioridade_escolhida);
+    limpa();
+
+    FILE *arquivo_export = fopen("tarefas_prioridade.txt", "w");
+    if (arquivo_export == NULL) {
+        printf("Erro ao criar o arquivo para exportar as tarefas.\n");
+        return;
+    }
+
+    for (int i = 0; i < cont; i++) {
+        if (tarefas[i].prioridade == prioridade_escolhida) {
+            fprintf(arquivo_export, "Prioridade: %d\nCategoria: %s\nEstado: %s\nDescricao: %s\n\n", tarefas[i].prioridade, tarefas[i].categoria, tarefas[i].estado, tarefas[i].descricao);
+        }
+    }
+
+    fclose(arquivo_export);
+    printf("Tarefas da prioridade %d exportadas para o arquivo 'tarefas_prioridade.txt'.\n", prioridade_escolhida);
+}
