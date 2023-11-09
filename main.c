@@ -82,7 +82,7 @@ int main() {
       } else if(opcaoExportar == 2){
         exportarTarefasPorCategoria(t, cont);
       } else if(opcaoExportar == 3){
-        
+        exportarTarefasPorCategoriaPrioridade(t, cont);
       }else{
         printf("Digite uma opcao entre 1 e 3!\n\n");
       }
@@ -95,7 +95,7 @@ int main() {
       printf("Ate logo\n");
       break;
     } else {
-      printf("Por favor, digite um valor entre 1 - 4.\n");
+      printf("Por favor, digite um valor entre 1 - 7.\n");
     }
   }
 

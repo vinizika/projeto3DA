@@ -252,10 +252,6 @@ void exportarTarefasPorPrioridade(struct Tarefa *tarefas, int cont) {
     limpa();
 
     FILE *arquivo_export = fopen("tarefas_prioridade.txt", "w");
-    if (arquivo_export == NULL) {
-        printf("Erro ao criar o arquivo para exportar as tarefas.\n");
-        return;
-    }
 
     for (int i = 0; i < cont; i++) {
         if (tarefas[i].prioridade == prioridade_escolhida) {
@@ -276,6 +272,17 @@ void exportarTarefasPorCategoria(struct Tarefa *tarefas, int cont) {
 
     FILE *arquivo_export = fopen("tarefas_categoria.txt", "w");
 
+    // Ordenando as tarefas por prioridade (algoritmo de ordenação bolha)
+    for (int i = 0; i < cont - 1; i++) {
+        for (int j = 0; j < cont - i - 1; j++) {
+            if (tarefas[j].prioridade > tarefas[j + 1].prioridade) {
+                struct Tarefa temp = tarefas[j];
+                tarefas[j] = tarefas[j + 1];
+                tarefas[j + 1] = temp;
+            }
+        }
+    }
+
     for (int i = 0; i < cont; i++) {
         if (strcmp(tarefas[i].categoria, categoria_escolhida) == 0) {
             fprintf(arquivo_export, "Prioridade: %d\nCategoria: %s\nEstado: %s\nDescricao: %s\n\n", tarefas[i].prioridade, tarefas[i].categoria, tarefas[i].estado, tarefas[i].descricao);
@@ -283,6 +290,29 @@ void exportarTarefasPorCategoria(struct Tarefa *tarefas, int cont) {
     }
 
     fclose(arquivo_export);
-    printf("Tarefas da categoria [%s] exportadas para o arquivo 'tarefas_categoria.txt'.\n", categoria_escolhida);
+    printf("Tarefas da categoria [%s] exportadas para o arquivo 'tarefas_categoria.txt' em ordem de prioridade.\n", categoria_escolhida);
 }
 
+void exportarTarefasPorCategoriaPrioridade(struct Tarefa *tarefas, int cont) {
+    char categoria_escolhida[100];
+    int prioridade_desejada;
+
+    printf("Insira a prioridade desejada: ");
+    scanf("%d", &prioridade_desejada);
+    limpa();
+
+    printf("Digite a categoria para exportar as tarefas: ");
+    scanf("%s", categoria_escolhida);
+    limpa();
+
+    FILE *arquivo_export = fopen("tarefas_categoriaPrioridade.txt", "w");
+
+    for (int i = 0; i < cont; i++) {
+        if (strcmp(tarefas[i].categoria, categoria_escolhida) == 0 && tarefas[i].prioridade == prioridade_desejada) {
+            fprintf(arquivo_export, "Prioridade: %d\nCategoria: %s\nEstado: %s\nDescricao: %s\n\n", tarefas[i].prioridade, tarefas[i].categoria, tarefas[i].estado, tarefas[i].descricao);
+        }
+    }
+
+    fclose(arquivo_export);
+    printf("Tarefas da categoria [%s] e com prioridade [%d] exportadas para o arquivo 'tarefas_categoriaPrioridade.txt'.\n", categoria_escolhida, prioridade_desejada);
+}
